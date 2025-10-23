@@ -1,4 +1,4 @@
-namespace linterTest {
+namespace LinterTest {
   
   enum KEY {
     POS = 1, NEG = -1
