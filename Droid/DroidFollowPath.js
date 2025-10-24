@@ -1,24 +1,24 @@
 //import { Command } from './DroidBase';
 //import { directions } from './DroidBase';
+import { DroidPathData } from './DroidPathData';
 export var Droid;
 (function (Droid) {
-    const directions = {
+    Droid.directions = {
         forward: "forward",
         backward: "backward",
         left: "left",
         right: "right",
         stop: "stop",
     };
-    const path = [directions.forward, directions.left, directions.forward, directions.left, directions.forward, directions.forward, directions.left, directions.forward, directions.forward, directions.left, directions.forward, directions.forward, directions.left, directions.forward, directions.left, directions.forward, directions.stop];
     let stepCounter = 0;
     function getCommand(_state) {
         console.log(_state);
-        if (stepCounter < path.length) {
+        if (stepCounter < DroidPathData.path.length) {
             stepCounter++;
-            return { module: "Chassis", method: "move", data: path[stepCounter - 1] };
+            return { module: "Chassis", method: "move", data: DroidPathData.path[stepCounter - 1] };
         }
         else {
-            return { module: "Chassis", method: "move", data: directions.stop };
+            return { module: "Chassis", method: "move", data: Droid.directions.stop };
         }
     }
     Droid.getCommand = getCommand;

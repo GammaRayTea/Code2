@@ -7,7 +7,7 @@ export namespace Droid {
         method: string,
         data: string
     }
-    const directions: { [key: string]: string } = {
+    export const directions: { [key: string]: string } = {
         forward: "forward",
         backward: "backward",
         left: "left",

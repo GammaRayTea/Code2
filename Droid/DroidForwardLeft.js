@@ -2,7 +2,7 @@
 //import { directions } from './DroidBase';
 export var Droid;
 (function (Droid) {
-    const directions = {
+    Droid.directions = {
         forward: "forward",
         backward: "backward",
         left: "left",
@@ -14,10 +14,10 @@ export var Droid;
         console.log(_input);
         cycle = !cycle;
         if (cycle) {
-            return { module: "Chassis", method: "move", data: directions.forward };
+            return { module: "Chassis", method: "move", data: Droid.directions.forward };
         }
         else {
-            return { module: "Chassis", method: "move", data: directions.left };
+            return { module: "Chassis", method: "move", data: Droid.directions.left };
         }
     }
     Droid.getCommand = getCommand;
