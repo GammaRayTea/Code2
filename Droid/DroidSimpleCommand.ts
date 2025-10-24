@@ -1,5 +1,5 @@
 
-namespace Droid {
+export namespace Droid {
     interface Command {
         module: string,
         method: string,

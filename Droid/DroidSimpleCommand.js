@@ -1,5 +1,4 @@
-"use strict";
-var Droid;
+export var Droid;
 (function (Droid) {
     const directions = {
         forward: "forward",
