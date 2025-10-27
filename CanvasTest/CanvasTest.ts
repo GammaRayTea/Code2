@@ -12,6 +12,7 @@ namespace CanvasTest {
     const programList: string[] = ["RandomTris", "TriCircle"];
     let deltaTime: number;
     let previousTime: number = 0;
+    
 
     //let lastTriangleVectors:[]
 
@@ -32,7 +33,7 @@ namespace CanvasTest {
         scaleCanvas();
         drawBackground();
 
-        myInterval = setInterval(processLoop, 16.6666);
+       setInterval(processLoop, 16.6666);
 
         chooseProgramme();
         drawStack = assembleDrawStack();
