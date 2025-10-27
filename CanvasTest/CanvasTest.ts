@@ -12,7 +12,6 @@ namespace CanvasTest {
     const programList: string[] = ["RandomTris", "TriCircle"];
     let deltaTime: number;
     let previousTime: number = 0;
-    let myInterval: NodeJS.Timeout;
 
     //let lastTriangleVectors:[]
 
@@ -80,7 +79,6 @@ namespace CanvasTest {
     function setUpSeed(): void {
         seed = Math.floor(Math.random() * 10000000000000000);
         const seedString: string = seed.toString();
-
     }
 
 
