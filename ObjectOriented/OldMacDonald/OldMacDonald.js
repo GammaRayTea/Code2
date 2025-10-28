@@ -22,10 +22,11 @@ var OldMacDonald;
             }
         }
         eat(_stock) {
-            if (_stock[this.food] - this.dailyConsumption >= 0) {
+            if ((_stock[this.food] - this.dailyConsumption) >= 0) {
                 _stock[this.food] -= this.dailyConsumption;
             }
             else {
+                console.log(_stock[this.food]);
                 console.log(`Not enough ${this.food}!`);
             }
             console.log(`
@@ -57,7 +58,7 @@ var OldMacDonald;
     class Farmer {
         stock = {};
         constructor(_foods) {
-            this.restock(_foods);
+            this.restock(_foods, true);
         }
         checkStock(_animals) {
             const emptyFoods = [];
@@ -66,6 +67,7 @@ var OldMacDonald;
                 for (const animal of _animals) {
                     if (food == animal.food) {
                         necessaryAmount += animal.dailyConsumption;
+                        console.log(necessaryAmount, food);
                     }
                 }
                 if (this.stock[food] < necessaryAmount) {
@@ -77,8 +79,11 @@ var OldMacDonald;
                 this.restock(emptyFoods);
             }
         }
-        restock(_emptyFoods) {
+        restock(_emptyFoods, _init = false) {
             for (const food of _emptyFoods) {
+                if (_init) {
+                    this.stock[food] = 0;
+                }
                 const newStockAmount = randomIntInRange(5, 20);
                 this.stock[food] += newStockAmount;
                 console.log(`${food} restocked to ${newStockAmount}`);
@@ -119,6 +124,7 @@ var OldMacDonald;
         farmer.checkStock(animals);
     }
     function processLoop() {
+        console.log(farmer.stock);
         if (currentStep < dailySteps) {
             if (currentStep == 0) {
                 console.log(`\n \n----------------Day ${day}----------------\n \n`);

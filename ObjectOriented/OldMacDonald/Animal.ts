@@ -25,11 +25,11 @@ namespace OldMacDonald {
 
         }
         public eat(_stock: Stock): void {
-            if (_stock[this.food]-this.dailyConsumption >= 0) {
+            if ((_stock[this.food]-this.dailyConsumption) >= 0) {
                 _stock[this.food]-=this.dailyConsumption;
             }
             else {
-                
+                console.log(_stock[this.food])
                 console.log(`Not enough ${this.food}!`)
             }
             

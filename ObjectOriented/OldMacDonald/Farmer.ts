@@ -7,7 +7,7 @@ namespace OldMacDonald {
         public stock: Stock = {};
 
         public constructor(_foods: string[]) {
-            this.restock(_foods);
+            this.restock(_foods, true);
         }
 
 
@@ -17,7 +17,9 @@ namespace OldMacDonald {
                 let necessaryAmount: number = 0;
                 for (const animal of _animals) {
                     if (food == animal.food) {
+
                         necessaryAmount += animal.dailyConsumption;
+                        console.log(necessaryAmount, food)
                     }
                 }
 
@@ -33,8 +35,12 @@ namespace OldMacDonald {
         }
 
 
-        public restock(_emptyFoods: string[]): void {
+        public restock(_emptyFoods: string[], _init: boolean = false): void {
+
             for (const food of _emptyFoods) {
+                if (_init) {
+                    this.stock[food] = 0
+                }
                 const newStockAmount: number = randomIntInRange(5, 20);
                 this.stock[food] += newStockAmount;
                 console.log(`${food} restocked to ${newStockAmount}`);

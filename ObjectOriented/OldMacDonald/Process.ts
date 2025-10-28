@@ -34,7 +34,7 @@ namespace OldMacDonald {
 
 
     function processLoop(): void {
-
+        console.log(farmer.stock)
         if (currentStep < dailySteps) {
             if (currentStep == 0) {
                 console.log(`\n \n----------------Day ${day}----------------\n \n`)
