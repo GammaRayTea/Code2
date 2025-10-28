@@ -25,7 +25,13 @@ namespace OldMacDonald {
 
         }
         public eat(_stock: Stock): void {
-            _stock[this.food]--;
+            if (_stock[this.food]-this.dailyConsumption >= 0) {
+                _stock[this.food]-=this.dailyConsumption;
+            }
+            else {
+                console.log(`Not enough ${this.food}!`)
+            }
+            
             console.log(`
                 ${this.name} the ${this.species} ate ${this.food}. \n
                 ${this.food} remaining: ${_stock[this.food]}
@@ -47,7 +53,7 @@ namespace OldMacDonald {
                 `;
 
             const textToDisplay: string =
-                `(${this.name} the ${this.species} ${this.sound}s:) \n ${song}`;
+                `${this.name} the ${this.species} ${this.sound}s: \n ${song}`;
             console.log(textToDisplay);
         }
     }

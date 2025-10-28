@@ -15,7 +15,7 @@ namespace OldMacDonald {
             const emptyFoods: string[] = []
             for (const food in this.stock) {
 
-                if (this.stock[food] == 0) {
+                if (this.stock[food] <= 0) {
                     emptyFoods.push(food);
                     console.log(`Ran out of ${food}`);
                 }

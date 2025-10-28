@@ -22,7 +22,12 @@ var OldMacDonald;
             }
         }
         eat(_stock) {
-            _stock[this.food]--;
+            if (_stock[this.food] - this.dailyConsumption >= 0) {
+                _stock[this.food] -= this.dailyConsumption;
+            }
+            else {
+                console.log(`Not enough ${this.food}!`);
+            }
             console.log(`
                 ${this.name} the ${this.species} ate ${this.food}. \n
                 ${this.food} remaining: ${_stock[this.food]}
@@ -41,7 +46,7 @@ var OldMacDonald;
                 Old MacDonald had a farm\n
                 Ee i ee i oh!
                 `;
-            const textToDisplay = `(${this.name} the ${this.species} ${this.sound}s:) \n ${song}`;
+            const textToDisplay = `${this.name} the ${this.species} ${this.sound}s: \n ${song}`;
             console.log(textToDisplay);
         }
     }
@@ -57,7 +62,7 @@ var OldMacDonald;
         checkStock() {
             const emptyFoods = [];
             for (const food in this.stock) {
-                if (this.stock[food] == 0) {
+                if (this.stock[food] <= 0) {
                     emptyFoods.push(food);
                     console.log(`Ran out of ${food}`);
                 }
@@ -97,7 +102,7 @@ var OldMacDonald;
             new OldMacDonald.Animal("Pig", "Gerhard", "Oink", "Carrot", 2),
             new OldMacDonald.Animal("Chicken", "Robert", "Cluck", "Grain", 1, "Chick"),
             new OldMacDonald.Animal("Horse", "Charlie", "Neigh", "Banana", 3),
-            new OldMacDonald.Animal("Llama", "Karl", "Scream", "Hay", 2)
+            new OldMacDonald.Animal("Llama", "Karl", "Scream", "Flower", 2)
         ];
         dailySteps = animals.length;
         const foods = [];
