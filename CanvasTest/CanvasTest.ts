@@ -203,9 +203,9 @@ namespace CanvasTest {
             drawStack.splice(i, 1);
 
         }
-        if (drawStack.length == 0) {
-            clearInterval(myInterval);
-        }
+        // if (drawStack.length == 0) {
+            
+        // }
     }
 
 

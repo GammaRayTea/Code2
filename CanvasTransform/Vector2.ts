@@ -17,6 +17,10 @@ namespace CanvasTransform {
             const y: number = this.y * _factor;
             return new Vec2(x, y);
         }
+        public setValues(_x: number, _y: number): void {
+            this.x = _x;
+            this.y = _y;
+        }
 
     }
 }
