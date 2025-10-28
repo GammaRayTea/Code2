@@ -29,6 +29,7 @@ namespace OldMacDonald {
                 _stock[this.food]-=this.dailyConsumption;
             }
             else {
+                
                 console.log(`Not enough ${this.food}!`)
             }
             

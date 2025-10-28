@@ -18,7 +18,7 @@ namespace OldMacDonald {
             new Animal("Pig", "Gerhard", "Oink", "Carrot", 2),
             new Animal("Chicken", "Robert", "Cluck", "Grain", 1, "Chick"),
             new Animal("Horse", "Charlie", "Neigh", "Banana", 3),
-            new Animal("Llama", "Karl", "Scream", "Flower", 2)
+            new Animal("Llama", "Karl", "Scream", "Hay", 2)
         ]
         dailySteps = animals.length;
 
@@ -27,7 +27,7 @@ namespace OldMacDonald {
             foods.push(animal.food);
         }
         farmer = new Farmer(foods);
-        farmer.checkStock();
+        farmer.checkStock(animals);
     }
 
 
@@ -45,7 +45,7 @@ namespace OldMacDonald {
 
         }
         else {
-            farmer.checkStock();
+            farmer.checkStock(animals);
             currentStep = 0;
             day++;
         }

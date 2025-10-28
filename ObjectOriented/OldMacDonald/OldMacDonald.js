@@ -59,10 +59,16 @@ var OldMacDonald;
         constructor(_foods) {
             this.restock(_foods);
         }
-        checkStock() {
+        checkStock(_animals) {
             const emptyFoods = [];
             for (const food in this.stock) {
-                if (this.stock[food] <= 0) {
+                let necessaryAmount = 0;
+                for (const animal of _animals) {
+                    if (food == animal.food) {
+                        necessaryAmount += animal.dailyConsumption;
+                    }
+                }
+                if (this.stock[food] < necessaryAmount) {
                     emptyFoods.push(food);
                     console.log(`Ran out of ${food}`);
                 }
@@ -74,7 +80,7 @@ var OldMacDonald;
         restock(_emptyFoods) {
             for (const food of _emptyFoods) {
                 const newStockAmount = randomIntInRange(5, 20);
-                this.stock[food] = newStockAmount;
+                this.stock[food] += newStockAmount;
                 console.log(`${food} restocked to ${newStockAmount}`);
             }
         }
@@ -102,7 +108,7 @@ var OldMacDonald;
             new OldMacDonald.Animal("Pig", "Gerhard", "Oink", "Carrot", 2),
             new OldMacDonald.Animal("Chicken", "Robert", "Cluck", "Grain", 1, "Chick"),
             new OldMacDonald.Animal("Horse", "Charlie", "Neigh", "Banana", 3),
-            new OldMacDonald.Animal("Llama", "Karl", "Scream", "Flower", 2)
+            new OldMacDonald.Animal("Llama", "Karl", "Scream", "Hay", 2)
         ];
         dailySteps = animals.length;
         const foods = [];
@@ -110,7 +116,7 @@ var OldMacDonald;
             foods.push(animal.food);
         }
         farmer = new OldMacDonald.Farmer(foods);
-        farmer.checkStock();
+        farmer.checkStock(animals);
     }
     function processLoop() {
         if (currentStep < dailySteps) {
@@ -122,7 +128,7 @@ var OldMacDonald;
             currentStep++;
         }
         else {
-            farmer.checkStock();
+            farmer.checkStock(animals);
             currentStep = 0;
             day++;
         }
