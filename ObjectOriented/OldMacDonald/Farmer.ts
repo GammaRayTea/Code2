@@ -19,7 +19,7 @@ namespace OldMacDonald {
                     if (food == animal.food) {
 
                         necessaryAmount += animal.dailyConsumption;
-                        console.log(necessaryAmount, food)
+                        
                     }
                 }
 
