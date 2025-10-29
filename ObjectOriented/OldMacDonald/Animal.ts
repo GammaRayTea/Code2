@@ -30,7 +30,7 @@ namespace OldMacDonald {
             }
             else {
                 
-                console.log(`Not enough ${this.food}!`)
+                console.log(`Not enough ${this.food}!`);
             }
             
             console.log(`

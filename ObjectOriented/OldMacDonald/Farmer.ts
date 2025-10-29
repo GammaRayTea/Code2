@@ -12,7 +12,7 @@ namespace OldMacDonald {
 
 
         public checkStock(_animals: Animal[]): void {
-            const emptyFoods: string[] = []
+            const emptyFoods: string[] = [];
             for (const food in this.stock) {
                 let necessaryAmount: number = 0;
                 for (const animal of _animals) {
@@ -39,7 +39,7 @@ namespace OldMacDonald {
 
             for (const food of _emptyFoods) {
                 if (_init) {
-                    this.stock[food] = 0
+                    this.stock[food] = 0;
                 }
                 const newStockAmount: number = randomIntInRange(5, 20);
                 this.stock[food] += newStockAmount;

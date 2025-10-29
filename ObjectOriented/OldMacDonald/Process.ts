@@ -36,7 +36,7 @@ namespace OldMacDonald {
     function processLoop(): void {
         if (currentStep < dailySteps) {
             if (currentStep == 0) {
-                console.log(`\n \n----------------Day ${day}----------------\n \n`)
+                console.log(`\n \n----------------Day ${day}----------------\n \n`);
             }
             animals[currentStep].eat(farmer.stock);
             animals[currentStep].sing();
