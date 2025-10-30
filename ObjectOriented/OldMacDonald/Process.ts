@@ -14,11 +14,11 @@ namespace OldMacDonald {
 
     function setup(): void {
         animals = [
-            new Animal("Cow", "Ingrid", "Moo", "Hay", 3),
-            new Animal("Pig", "Gerhard", "Oink", "Carrot", 2),
-            new Animal("Chicken", "Robert", "Cluck", "Grain", 1, "Chick"),
-            new Animal("Horse", "Charlie", "Neigh", "Banana", 3),
-            new Animal("Llama", "Karl", "Scream", "Hay", 2)
+            new Cow("Cow", "Ingrid", "Moo", "Hay", 3),
+            new Pig("Pig", "Gerhard", "Oink", "Carrot", 2),
+            new Chicken("Chicken", "Robert", "Cluck", "Grain", 1, "Chick"),
+            new Horse("Horse", "Charlie", "Neigh", "Banana", 3),
+            new Llama("Llama", "Karl", "Scream", "Hay", 2)
         ]
         dailySteps = animals.length;
 
@@ -40,6 +40,7 @@ namespace OldMacDonald {
             }
             animals[currentStep].eat(farmer.stock);
             animals[currentStep].sing();
+            (animals[currentStep]).doSpecialAction(day) ;
             currentStep++;
 
         }

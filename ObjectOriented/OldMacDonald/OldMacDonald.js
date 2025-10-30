@@ -26,7 +26,6 @@ var OldMacDonald;
                 _stock[this.food] -= this.dailyConsumption;
             }
             else {
-                console.log(_stock[this.food]);
                 console.log(`Not enough ${this.food}!`);
             }
             console.log(`
@@ -50,8 +49,32 @@ var OldMacDonald;
             const textToDisplay = `${this.name} the ${this.species} ${this.sound}s: \n ${song}`;
             console.log(textToDisplay);
         }
+        doSpecialAction(_day) {
+        }
     }
     OldMacDonald.Animal = Animal;
+})(OldMacDonald || (OldMacDonald = {}));
+var OldMacDonald;
+(function (OldMacDonald) {
+    class Chicken extends OldMacDonald.Animal {
+        doSpecialAction(_day) {
+            if (_day % 1 == 0) {
+                console.log(`${this.name} the ${this.species} layed an egg.`);
+            }
+        }
+    }
+    OldMacDonald.Chicken = Chicken;
+})(OldMacDonald || (OldMacDonald = {}));
+var OldMacDonald;
+(function (OldMacDonald) {
+    class Cow extends OldMacDonald.Animal {
+        doSpecialAction(_day) {
+            if (_day % 4 == 0) {
+                console.log(`${this.name} the ${this.species} produced milk.`);
+            }
+        }
+    }
+    OldMacDonald.Cow = Cow;
 })(OldMacDonald || (OldMacDonald = {}));
 var OldMacDonald;
 (function (OldMacDonald) {
@@ -67,7 +90,6 @@ var OldMacDonald;
                 for (const animal of _animals) {
                     if (food == animal.food) {
                         necessaryAmount += animal.dailyConsumption;
-                        console.log(necessaryAmount, food);
                     }
                 }
                 if (this.stock[food] < necessaryAmount) {
@@ -97,6 +119,39 @@ var OldMacDonald;
 })(OldMacDonald || (OldMacDonald = {}));
 var OldMacDonald;
 (function (OldMacDonald) {
+    class Horse extends OldMacDonald.Animal {
+        doSpecialAction(_day) {
+            if (_day % 10 == 0) {
+                console.log(`${this.name} the ${this.species} jumped over the fence.`);
+            }
+        }
+    }
+    OldMacDonald.Horse = Horse;
+})(OldMacDonald || (OldMacDonald = {}));
+var OldMacDonald;
+(function (OldMacDonald) {
+    class Llama extends OldMacDonald.Animal {
+        doSpecialAction(_day) {
+            if (_day % 3 == 0) {
+                console.log(`${this.name} the ${this.species} spat at the farmer.`);
+            }
+        }
+    }
+    OldMacDonald.Llama = Llama;
+})(OldMacDonald || (OldMacDonald = {}));
+var OldMacDonald;
+(function (OldMacDonald) {
+    class Pig extends OldMacDonald.Animal {
+        doSpecialAction(_day) {
+            if (_day % 5 == 0) {
+                console.log(`${this.name} the ${this.species} covered itself in mud.`);
+            }
+        }
+    }
+    OldMacDonald.Pig = Pig;
+})(OldMacDonald || (OldMacDonald = {}));
+var OldMacDonald;
+(function (OldMacDonald) {
     let day = 0;
     let dailySteps = 0;
     let currentStep = 0;
@@ -109,11 +164,11 @@ var OldMacDonald;
     }
     function setup() {
         animals = [
-            new OldMacDonald.Animal("Cow", "Ingrid", "Moo", "Hay", 3),
-            new OldMacDonald.Animal("Pig", "Gerhard", "Oink", "Carrot", 2),
-            new OldMacDonald.Animal("Chicken", "Robert", "Cluck", "Grain", 1, "Chick"),
-            new OldMacDonald.Animal("Horse", "Charlie", "Neigh", "Banana", 3),
-            new OldMacDonald.Animal("Llama", "Karl", "Scream", "Hay", 2)
+            new OldMacDonald.Cow("Cow", "Ingrid", "Moo", "Hay", 3),
+            new OldMacDonald.Pig("Pig", "Gerhard", "Oink", "Carrot", 2),
+            new OldMacDonald.Chicken("Chicken", "Robert", "Cluck", "Grain", 1, "Chick"),
+            new OldMacDonald.Horse("Horse", "Charlie", "Neigh", "Banana", 3),
+            new OldMacDonald.Llama("Llama", "Karl", "Scream", "Hay", 2)
         ];
         dailySteps = animals.length;
         const foods = [];
@@ -124,13 +179,13 @@ var OldMacDonald;
         farmer.checkStock(animals);
     }
     function processLoop() {
-        console.log(farmer.stock);
         if (currentStep < dailySteps) {
             if (currentStep == 0) {
                 console.log(`\n \n----------------Day ${day}----------------\n \n`);
             }
             animals[currentStep].eat(farmer.stock);
             animals[currentStep].sing();
+            (animals[currentStep]).doSpecialAction(day);
             currentStep++;
         }
         else {

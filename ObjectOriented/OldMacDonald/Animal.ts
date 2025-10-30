@@ -57,5 +57,8 @@ namespace OldMacDonald {
                 `${this.name} the ${this.species} ${this.sound}s: \n ${song}`;
             console.log(textToDisplay);
         }
+        public doSpecialAction(_day:number):void{
+
+        }
     }
 }
