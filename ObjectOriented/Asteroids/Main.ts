@@ -145,9 +145,9 @@ namespace Asteroids {
 
 
     function deleteQueued(): void {
-        for (const moveable of moveables) {
-            if (moveable.deletionQueued) {
-                moveables.splice(moveables.indexOf(moveable), 1)
+        for (let i: number = moveables.length-1; i >= 0; i--) {
+            if (moveables[i].deletionQueued) {
+                moveables.splice(moveables.indexOf(moveables[i]), 1);
             }
         }
     }

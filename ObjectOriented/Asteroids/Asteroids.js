@@ -456,9 +456,9 @@ var Asteroids;
         _asteroid.delete();
     }
     function deleteQueued() {
-        for (const moveable of moveables) {
-            if (moveable.deletionQueued) {
-                moveables.splice(moveables.indexOf(moveable), 1);
+        for (let i = moveables.length - 1; i >= 0; i--) {
+            if (moveables[i].deletionQueued) {
+                moveables.splice(moveables.indexOf(moveables[i]), 1);
             }
         }
     }
