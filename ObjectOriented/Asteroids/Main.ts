@@ -78,11 +78,7 @@ namespace Asteroids {
             moveable.move((delta / 1000));
             moveable.draw();
         }
-<<<<<<< HEAD
         Input.updateBuffer();
-=======
-        Input.update();
->>>>>>> f670271690a146d221df38cdda541e141ffaeb8b
         deleteQueued();
         //ufo.move(delta / 1000);
         //ufo.draw();
