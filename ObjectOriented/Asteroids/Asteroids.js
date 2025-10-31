@@ -15,10 +15,10 @@ var Input;
             registeredActions.push(input);
         }
     }
-    function update() {
+    function updateBuffer() {
         lastActiveActions = activeActions.slice(0, activeActions.length);
     }
-    Input.update = update;
+    Input.updateBuffer = updateBuffer;
     function handleKeyDown(_event) {
         const foundRegistered = registeredActions.find((_action) => { return _action.key == _event.key; });
         const foundActive = activeActions.find((_action) => { return _action.key == _event.key; });
@@ -414,7 +414,7 @@ var Asteroids;
             moveable.move((delta / 1000));
             moveable.draw();
         }
-        Input.update();
+        Input.updateBuffer();
         deleteQueued();
         //ufo.move(delta / 1000);
         //ufo.draw();

@@ -22,7 +22,7 @@ namespace Input {
         }
     }
 
-    export function update(): void {
+    export function updateBuffer(): void {
         lastActiveActions = activeActions.slice(0, activeActions.length);
     }
 
@@ -47,7 +47,7 @@ namespace Input {
     export function isInputJustPressed(_recievedActionName: string): boolean {
 
         if (activeActions.find(_element => _element.actionName === _recievedActionName) && !lastActiveActions.find(_element => _element.actionName === _recievedActionName)) {
-            
+
             return true;
 
         }
@@ -60,7 +60,7 @@ namespace Input {
     export function isInputJustReleased(_recievedActionName: string): boolean {
 
         if (!activeActions.find(_element => _element.actionName === _recievedActionName) && lastActiveActions.find(_element => _element.actionName === _recievedActionName)) {
-            
+
             return true;
 
         }
@@ -72,7 +72,7 @@ namespace Input {
     }
     export function isInputPressed(_recievedActionName: string): boolean {
         if (activeActions.find(_element => _element.actionName === _recievedActionName)) {
-        
+
             return true;
 
         }
