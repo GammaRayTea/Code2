@@ -15,6 +15,8 @@ namespace Input {
 
     }
 
+
+
     function createRegisteredInputList(): void {
 
         for (const input of inputMap) {
@@ -22,9 +24,13 @@ namespace Input {
         }
     }
 
+
+
     export function updateBuffer(): void {
         lastActiveActions = activeActions.slice(0, activeActions.length);
     }
+
+
 
     function handleKeyDown(_event: KeyboardEvent): void {
         const foundRegistered: Action | undefined = registeredActions.find((_action) => { return _action.key == _event.key });
@@ -36,6 +42,9 @@ namespace Input {
 
         }
     }
+
+
+
     function handleKeyUp(_event: KeyboardEvent): void {
         const foundAction: Action | undefined = activeActions.find(_element => _element.key === _event.key)
         if (foundAction !== undefined) {
@@ -47,39 +56,31 @@ namespace Input {
     export function isInputJustPressed(_recievedActionName: string): boolean {
 
         if (activeActions.find(_element => _element.actionName === _recievedActionName) && !lastActiveActions.find(_element => _element.actionName === _recievedActionName)) {
-
             return true;
-
         }
         else {
-
             return false;
-
         }
     }
+
+
     export function isInputJustReleased(_recievedActionName: string): boolean {
 
         if (!activeActions.find(_element => _element.actionName === _recievedActionName) && lastActiveActions.find(_element => _element.actionName === _recievedActionName)) {
-
             return true;
-
         }
         else {
-
             return false;
-
         }
     }
+
+
     export function isInputPressed(_recievedActionName: string): boolean {
         if (activeActions.find(_element => _element.actionName === _recievedActionName)) {
-
             return true;
-
         }
         else {
-
             return false;
-
         }
     }
 }

@@ -117,15 +117,14 @@ namespace Asteroids {
         if (Input.isInputPressed("forward")) {
             ship.accelerate();
         }
-
-
-
-
         if (Input.isInputPressed("left")) {
             ship.rotation -= 0.002;
         }
         else if (Input.isInputPressed("right")) {
             ship.rotation += 0.002;
+        }
+        if (Input.isInputJustPressed("shoot")) {
+
         }
 
     }
@@ -145,9 +144,10 @@ namespace Asteroids {
 
 
     function deleteQueued(): void {
-        for (let i: number = moveables.length-1; i >= 0; i--) {
+        for (let i: number = moveables.length - 1; i >= 0; i--) {
             if (moveables[i].deletionQueued) {
-                moveables.splice(moveables.indexOf(moveables[i]), 1);
+                moveables.splice(i, 1);
+                console.log(moveables.length);
             }
         }
     }

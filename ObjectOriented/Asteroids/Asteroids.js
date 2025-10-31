@@ -444,6 +444,8 @@ var Asteroids;
         else if (Input.isInputPressed("right")) {
             ship.rotation += 0.002;
         }
+        if (Input.isInputJustPressed("shoot")) {
+        }
     }
     function breakAsteroid(_asteroid) {
         if (_asteroid.size > 0.3) {
@@ -458,7 +460,8 @@ var Asteroids;
     function deleteQueued() {
         for (let i = moveables.length - 1; i >= 0; i--) {
             if (moveables[i].deletionQueued) {
-                moveables.splice(moveables.indexOf(moveables[i]), 1);
+                moveables.splice(i, 1);
+                console.log(moveables.length);
             }
         }
     }

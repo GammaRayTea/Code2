@@ -8,6 +8,7 @@ namespace Asteroids {
             this.drawOffset.set(30, 20);
 
         }
+        
     }
 
 }
