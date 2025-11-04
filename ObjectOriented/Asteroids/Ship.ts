@@ -25,7 +25,7 @@ namespace Asteroids {
             acceleration.rotate(this.rotation);
             this.velocity.add(acceleration);
             super.move(_timeslice);
-            
+            console.log(this.rotation)
 
         }
 

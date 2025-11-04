@@ -121,10 +121,10 @@ namespace Asteroids {
             ship.accelerate();
         }
         if (Input.isInputPressed("left")) {
-            ship.rotation -= 0.002;
+            ship.rotation -= 4;
         }
         else if (Input.isInputPressed("right")) {
-            ship.rotation += 0.002;
+            ship.rotation += 4;
         }
         if (Input.isInputJustPressed("shoot")) {
 

@@ -294,6 +294,7 @@ var Asteroids;
             acceleration.rotate(this.rotation);
             this.velocity.add(acceleration);
             super.move(_timeslice);
+            console.log(this.rotation);
         }
         isHit(_hotspot) {
             const hitSize = 20;
@@ -455,10 +456,10 @@ var Asteroids;
             ship.accelerate();
         }
         if (Input.isInputPressed("left")) {
-            ship.rotation -= 0.002;
+            ship.rotation -= 4;
         }
         else if (Input.isInputPressed("right")) {
-            ship.rotation += 0.002;
+            ship.rotation += 4;
         }
         if (Input.isInputJustPressed("shoot")) {
         }
