@@ -1,20 +1,20 @@
 namespace Asteroids {
-    export class Moveable {
-        public position: Vector2 = new Vector2(0, 0);
-        public velocity: Vector2 = new Vector2(0, 0);;
-        public scale: Vector2 = new Vector2(1, 1);
+    export abstract class Moveable {
+        public readonly position: Vector2 = new Vector2(0, 0);
+        public velocity: Vector2 = new Vector2(0, 0);
+        public readonly scale: Vector2 = new Vector2(1, 1);
         public rotation: number = 0;
         public path?: Path2D;
-        public drawOffset: Vector2 = new Vector2(0, 0);
         public deletionQueued: boolean = false;
+        protected readonly drawOffset: Vector2 = new Vector2(0, 0);
         public constructor(_position?: Vector2) {
             if (_position) {
-                this.position = _position.copy();
+                this.position = new Vector2(_position);
             }
         }
 
 
-        public get drawLineStrength(): number {
+        protected get drawLineStrength(): number {
             return 1
         }
 

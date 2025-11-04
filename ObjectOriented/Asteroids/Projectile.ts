@@ -2,8 +2,8 @@ namespace Asteroids {
     export class Projectile extends Moveable {
         public lifeTime: number = 3;
         public constructor(_position: Vector2, _velocity: Vector2) {
-            super(_position.copy());
-            this.velocity = _velocity.copy();
+            super(new Vector2(_position));
+            this.velocity = new Vector2(_velocity);
             this.velocity.scale(4);
             this.path = projectilePath;
         }

@@ -517,9 +517,25 @@ var Asteroids;
         projectileTimer = 60;
         constructor() {
             super();
+            this.position = this.spawnPoint();
             this.velocity.set(10, 10);
             this.path = Asteroids.ufoPath;
             this.drawOffset.set(30, 20);
+        }
+        get spawnPoint() {
+            const spawnHeight = Asteroids.randomIntInRange(20, Asteroids.crc2.canvas.height - 20);
+            switch (Asteroids.randomIntInRange(0, 1)) {
+                case 0: {
+                    break;
+                }
+                case 1: {
+                    break;
+                }
+            }
+            const spawnPoint = new Asteroids.Vector2(0, spawnHeight);
+        }
+        move(_timeslice) {
+            super.move(_timeslice);
         }
     }
     Asteroids.Ufo = Ufo;
