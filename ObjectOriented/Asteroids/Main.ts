@@ -169,7 +169,7 @@ namespace Asteroids {
     function spawnProjectile(_event: Event): void {
 
         const ufo: Ufo = (_event as CustomEvent).detail.ufo
-        const projectile: Projectile = new Projectile(ufo.position, ufo.velocity);
+        const projectile: Projectile = new Projectile(ufo.position, Vector2.getDifference(ship.position, ufo.position));
         moveables.push(projectile);
     }
 

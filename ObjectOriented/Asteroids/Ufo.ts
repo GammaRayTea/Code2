@@ -1,6 +1,7 @@
 namespace Asteroids {
     export class Ufo extends Moveable {
-        public projectileTimer: number = 60;
+        private static readonly projectileInterval:number  = 120;
+        private projectileTimer: number = Ufo.projectileInterval;
         public constructor() {
             super();
             //this.position.set(this.spawnPoint);
@@ -26,7 +27,7 @@ namespace Asteroids {
         public move(_timeslice: number): void {
             if (this.projectileTimer == 0) {
                 this.shoot();
-                this.projectileTimer = 60;
+                this.projectileTimer = Ufo.projectileInterval;
             }
             else {
                 this.projectileTimer--;
@@ -39,7 +40,7 @@ namespace Asteroids {
         private shoot(): void {
             const customEvent: CustomEvent = new CustomEvent("ufoShoot", { detail: { ufo: this } })
             crc2.canvas.dispatchEvent(customEvent);
-            
+
         }
     }
 

@@ -46,7 +46,6 @@ namespace Asteroids {
         }
         public rotate(_angleDegree: number): void {
             const angleRad: number = toRadian(_angleDegree);
-            //console.log(angleRad)
             const xNew: number = this.x * Math.cos(angleRad) - this.y * Math.sin(angleRad);
             const yNew: number = this.y * Math.cos(angleRad) + this.x * Math.sin(angleRad);
             this.set(xNew, yNew);

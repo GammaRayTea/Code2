@@ -101,7 +101,6 @@ var Asteroids;
         }
         rotate(_angleDegree) {
             const angleRad = Asteroids.toRadian(_angleDegree);
-            //console.log(angleRad)
             const xNew = this.x * Math.cos(angleRad) - this.y * Math.sin(angleRad);
             const yNew = this.y * Math.cos(angleRad) + this.x * Math.sin(angleRad);
             this.set(xNew, yNew);
@@ -294,7 +293,6 @@ var Asteroids;
             acceleration.rotate(this.rotation);
             this.velocity.add(acceleration);
             super.move(_timeslice);
-            console.log(this.rotation);
         }
         isHit(_hotspot) {
             const hitSize = 20;
@@ -493,7 +491,7 @@ var Asteroids;
     }
     function spawnProjectile(_event) {
         const ufo = _event.detail.ufo;
-        const projectile = new Asteroids.Projectile(ufo.position, ufo.velocity);
+        const projectile = new Asteroids.Projectile(ufo.position, Asteroids.Vector2.getDifference(ship.position, ufo.position));
         moveables.push(projectile);
     }
 })(Asteroids || (Asteroids = {}));
@@ -504,7 +502,6 @@ var Asteroids;
     }
     Asteroids.toDegree = toDegree;
     function toRadian(_angleDegree) {
-        console.log(_angleDegree);
         return _angleDegree * (Math.PI / 180);
     }
     Asteroids.toRadian = toRadian;
@@ -523,11 +520,12 @@ var Asteroids;
         lifeTime = 3;
         constructor(_position, _velocity) {
             super(new Asteroids.Vector2(_position));
-            this.velocity = new Asteroids.Vector2(_velocity);
-            const rand = Asteroids.randomNumberInRange(-1, 1);
+            this.velocity = _velocity;
+            this.velocity.normalise();
+            const rand = Asteroids.randomNumberInRange(-20, 20);
             console.log(rand);
             this.velocity.rotate(rand);
-            this.velocity.scale(4);
+            this.velocity.scale(100);
             this.path = Asteroids.projectilePath;
         }
         move(_timeslice) {
@@ -543,7 +541,8 @@ var Asteroids;
 var Asteroids;
 (function (Asteroids) {
     class Ufo extends Asteroids.Moveable {
-        projectileTimer = 60;
+        static projectileInterval = 120;
+        projectileTimer = Ufo.projectileInterval;
         constructor() {
             super();
             //this.position.set(this.spawnPoint);
@@ -566,7 +565,7 @@ var Asteroids;
         move(_timeslice) {
             if (this.projectileTimer == 0) {
                 this.shoot();
-                this.projectileTimer = 60;
+                this.projectileTimer = Ufo.projectileInterval;
             }
             else {
                 this.projectileTimer--;

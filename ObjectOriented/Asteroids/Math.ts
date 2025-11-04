@@ -3,7 +3,6 @@ namespace Asteroids {
         return _angleRad * (180 / Math.PI)
     }
     export function toRadian(_angleDegree: number): number {
-        console.log(_angleDegree)
         return _angleDegree * (Math.PI / 180)
     }
     export function randomIntInRange(_min: number, _max: number): number {
