@@ -150,7 +150,6 @@ namespace Asteroids {
         for (let i: number = moveables.length - 1; i >= 0; i--) {
             if (moveables[i].deletionQueued) {
                 moveables.splice(i, 1);
-                console.log(moveables.length);
             }
         }
     }
@@ -170,7 +169,6 @@ namespace Asteroids {
     function spawnProjectile(_event: Event): void {
 
         const ufo: Ufo = (_event as CustomEvent).detail.ufo
-        console.log(ufo.position)
         const projectile: Projectile = new Projectile(ufo.position, ufo.velocity);
         moveables.push(projectile);
     }

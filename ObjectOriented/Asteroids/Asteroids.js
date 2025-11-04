@@ -101,6 +101,7 @@ var Asteroids;
         }
         rotate(_angleDegree) {
             const angleRad = Asteroids.toRadian(_angleDegree);
+            //console.log(angleRad)
             const xNew = this.x * Math.cos(angleRad) - this.y * Math.sin(angleRad);
             const yNew = this.y * Math.cos(angleRad) + this.x * Math.sin(angleRad);
             this.set(xNew, yNew);
@@ -476,7 +477,6 @@ var Asteroids;
         for (let i = moveables.length - 1; i >= 0; i--) {
             if (moveables[i].deletionQueued) {
                 moveables.splice(i, 1);
-                console.log(moveables.length);
             }
         }
     }
@@ -492,7 +492,6 @@ var Asteroids;
     }
     function spawnProjectile(_event) {
         const ufo = _event.detail.ufo;
-        console.log(ufo.position);
         const projectile = new Asteroids.Projectile(ufo.position, ufo.velocity);
         moveables.push(projectile);
     }
@@ -500,17 +499,22 @@ var Asteroids;
 var Asteroids;
 (function (Asteroids) {
     function toDegree(_angleRad) {
-        return _angleRad * (Math.PI / 180);
+        return _angleRad * (180 / Math.PI);
     }
     Asteroids.toDegree = toDegree;
     function toRadian(_angleDegree) {
-        return _angleDegree * (180 / Math.PI);
+        console.log(_angleDegree);
+        return _angleDegree * (Math.PI / 180);
     }
     Asteroids.toRadian = toRadian;
     function randomIntInRange(_min, _max) {
         return _min + Math.floor((_max - _min + 1) * Math.random());
     }
     Asteroids.randomIntInRange = randomIntInRange;
+    function randomNumberInRange(_min, _max) {
+        return _min + (_max - _min) * Math.random();
+    }
+    Asteroids.randomNumberInRange = randomNumberInRange;
 })(Asteroids || (Asteroids = {}));
 var Asteroids;
 (function (Asteroids) {
@@ -519,6 +523,9 @@ var Asteroids;
         constructor(_position, _velocity) {
             super(new Asteroids.Vector2(_position));
             this.velocity = new Asteroids.Vector2(_velocity);
+            const rand = Asteroids.randomNumberInRange(-1, 1);
+            console.log(rand);
+            this.velocity.rotate(rand);
             this.velocity.scale(4);
             this.path = Asteroids.projectilePath;
         }
