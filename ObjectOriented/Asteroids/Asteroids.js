@@ -220,9 +220,9 @@ var Asteroids;
         velocity = new Asteroids.Vector2(0, 0);
         scale = new Asteroids.Vector2(1, 1);
         rotation = 0;
-        path;
         deletionQueued = false;
         drawOffset = new Asteroids.Vector2(0, 0);
+        path;
         constructor(_position) {
             if (_position) {
                 this.position = new Asteroids.Vector2(_position);
@@ -235,7 +235,7 @@ var Asteroids;
             this.path.rect(this.drawOffset.x, this.drawOffset.y, 3, 3);
         }
         move(_timeslice) {
-            const offset = this.velocity.copy();
+            const offset = new Asteroids.Vector2(this.velocity);
             offset.scale(_timeslice);
             this.position.add(offset);
             if (this.position.x < -50) {

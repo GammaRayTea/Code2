@@ -1,6 +1,6 @@
 namespace Asteroids {
     export class Ship extends Moveable {
-        public thrust: number = 0
+        private thrust: number = 0
         private readonly maxThrust: number = 2;
         private readonly maxSpeed: number = 100;
 

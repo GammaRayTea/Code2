@@ -4,9 +4,9 @@ namespace Asteroids {
         public velocity: Vector2 = new Vector2(0, 0);
         public readonly scale: Vector2 = new Vector2(1, 1);
         public rotation: number = 0;
-        public path?: Path2D;
         public deletionQueued: boolean = false;
         protected readonly drawOffset: Vector2 = new Vector2(0, 0);
+        protected path?: Path2D;
         public constructor(_position?: Vector2) {
             if (_position) {
                 this.position = new Vector2(_position);
@@ -23,7 +23,7 @@ namespace Asteroids {
         }
 
         public move(_timeslice: number): void {
-            const offset: Vector2 = this.velocity.copy();
+            const offset: Vector2 = new Vector2(this.velocity);
             offset.scale(_timeslice);
             this.position.add(offset);
             if (this.position.x < -50) {

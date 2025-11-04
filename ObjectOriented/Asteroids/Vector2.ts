@@ -17,7 +17,7 @@ namespace Asteroids {
         }
         public static getDifference(_v0: Vector2, _v1: Vector2): Vector2 {
             const vector: Vector2 = new Vector2(_v0.x - _v1.x, _v0.y - _v1.y);
-            return vector
+            return vector;
         }
         public static random(_minLength: number, _maxLength: number): Vector2 {
 
