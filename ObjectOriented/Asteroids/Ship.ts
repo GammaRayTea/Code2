@@ -1,9 +1,9 @@
 namespace Asteroids {
     export class Ship extends Moveable {
+        
+        private static readonly maxThrust: number = 2;
+        private static readonly maxSpeed: number = 100;
         private thrust: number = 0
-        private readonly maxThrust: number = 2;
-        private readonly maxSpeed: number = 100;
-
 
         public constructor(_position: Vector2 = new Vector2(240, 180)) {
             super(_position);
@@ -43,7 +43,7 @@ namespace Asteroids {
 
 
         public accelerate(): void {
-            if (this.thrust < this.maxThrust) {
+            if (this.thrust < Ship.maxThrust) {
                 this.thrust += 1;
             }
 
@@ -57,8 +57,8 @@ namespace Asteroids {
                     this.thrust = 0;
                 }
             }
-            if (this.velocity.length > this.maxSpeed) {
-                this.velocity.length = this.maxSpeed;
+            if (this.velocity.length > Ship.maxSpeed) {
+                this.velocity.length = Ship.maxSpeed;
             }
 
 

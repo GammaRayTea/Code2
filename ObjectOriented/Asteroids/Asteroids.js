@@ -106,7 +106,6 @@ var Asteroids;
             this.set(xNew, yNew);
         }
         set(..._args) {
-            console.log(_args);
             if (_args.length === 1) {
                 this.x = _args[0].x;
                 this.y = _args[0].y;
@@ -276,9 +275,9 @@ var Asteroids;
 var Asteroids;
 (function (Asteroids) {
     class Ship extends Asteroids.Moveable {
+        static maxThrust = 2;
+        static maxSpeed = 100;
         thrust = 0;
-        maxThrust = 2;
-        maxSpeed = 100;
         constructor(_position = new Asteroids.Vector2(240, 180)) {
             super(_position);
             this.scale.set(0.6, 0.6);
@@ -306,7 +305,7 @@ var Asteroids;
             }
         }
         accelerate() {
-            if (this.thrust < this.maxThrust) {
+            if (this.thrust < Ship.maxThrust) {
                 this.thrust += 1;
             }
         }
@@ -317,8 +316,8 @@ var Asteroids;
                     this.thrust = 0;
                 }
             }
-            if (this.velocity.length > this.maxSpeed) {
-                this.velocity.length = this.maxSpeed;
+            if (this.velocity.length > Ship.maxSpeed) {
+                this.velocity.length = Ship.maxSpeed;
             }
         }
     }
@@ -407,6 +406,7 @@ var Asteroids;
     }
     function installListeners(_canvas) {
         _canvas.addEventListener("mouseup", shootLaser);
+        _canvas.addEventListener("ufoShoot", spawnProjectile);
     }
     function clearBackground() {
         Asteroids.crc2.fillStyle = "black";
@@ -490,6 +490,12 @@ var Asteroids;
         }
         return null;
     }
+    function spawnProjectile(_event) {
+        const ufo = _event.detail.ufo;
+        console.log(ufo.position);
+        const projectile = new Asteroids.Projectile(ufo.position, ufo.velocity);
+        moveables.push(projectile);
+    }
 })(Asteroids || (Asteroids = {}));
 var Asteroids;
 (function (Asteroids) {
@@ -537,20 +543,31 @@ var Asteroids;
             this.path = Asteroids.ufoPath;
             this.drawOffset.set(30, 20);
         }
-        get spawnPoint() {
-            const spawnHeight = Asteroids.randomIntInRange(20, Asteroids.crc2.canvas.height - 20);
-            switch (Asteroids.randomIntInRange(0, 1)) {
-                case 0: {
-                    break;
-                }
-                case 1: {
-                    break;
-                }
-            }
-            const spawnPoint = new Asteroids.Vector2(0, spawnHeight);
-        }
+        // private get spawnPoint(): Vector2 {
+        //     const spawnHeight: number = randomIntInRange(20, crc2.canvas.height - 20);
+        //     switch (randomIntInRange(0, 1)) {
+        //         case 0: {
+        //             break;
+        //         }
+        //         case 1: {
+        //             break;
+        //         }
+        //     }
+        //     const spawnPoint: Vector2 = new Vector2(0, spawnHeight);
+        // }
         move(_timeslice) {
+            if (this.projectileTimer == 0) {
+                this.shoot();
+                this.projectileTimer = 60;
+            }
+            else {
+                this.projectileTimer--;
+            }
             super.move(_timeslice);
+        }
+        shoot() {
+            const customEvent = new CustomEvent("ufoShoot", { detail: { ufo: this } });
+            Asteroids.crc2.canvas.dispatchEvent(customEvent);
         }
     }
     Asteroids.Ufo = Ufo;

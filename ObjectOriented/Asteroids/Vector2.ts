@@ -53,7 +53,7 @@ namespace Asteroids {
         public set(_vector: Vector2): void;
         public set(_x: number, _y: number): void;
         public set(..._args: any[]): void {
-            console.log(_args)
+            
             if (_args.length === 1) {
                 this.x = _args[0].x
                 this.y = _args[0].y

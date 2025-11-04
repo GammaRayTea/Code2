@@ -2,6 +2,7 @@
 
 namespace Asteroids {
     window.addEventListener("load", handleLoad);
+
     const debug: boolean = true;
     const frameRate: number = 120;
     const startingAsteroids: number = 5;
@@ -16,6 +17,7 @@ namespace Asteroids {
     let ufo: Ufo;
     //process setup
     function handleLoad(_event: Event): void {
+
         console.log("Asteroids starting");
         createPaths();
         setUpCanvas();
@@ -49,6 +51,7 @@ namespace Asteroids {
     }
     function installListeners(_canvas: HTMLCanvasElement): void {
         _canvas.addEventListener("mouseup", shootLaser);
+        _canvas.addEventListener("ufoShoot", spawnProjectile);
     }
 
     function clearBackground(): void {
@@ -164,5 +167,12 @@ namespace Asteroids {
         return null;
     }
 
+    function spawnProjectile(_event: Event): void {
+
+        const ufo: Ufo = (_event as CustomEvent).detail.ufo
+        console.log(ufo.position)
+        const projectile: Projectile = new Projectile(ufo.position, ufo.velocity);
+        moveables.push(projectile);
+    }
 
 }
