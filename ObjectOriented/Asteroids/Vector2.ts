@@ -12,7 +12,7 @@ namespace Asteroids {
             if (_args.length === 2)
                 this.set(_args[0], _args[1]);
             else if (_args.length === 1) {
-                this.set(_args[0].x, _args[1].y)
+                this.set(_args[0].x, _args[0].y)
             }
         }
         public static getDifference(_v0: Vector2, _v1: Vector2): Vector2 {
@@ -53,6 +53,7 @@ namespace Asteroids {
         public set(_vector: Vector2): void;
         public set(_x: number, _y: number): void;
         public set(..._args: any[]): void {
+            console.log(_args)
             if (_args.length === 1) {
                 this.x = _args[0].x
                 this.y = _args[0].y

@@ -66,8 +66,23 @@ var Asteroids;
     class Vector2 {
         x;
         y;
-        constructor(_x, _y) {
-            this.set(_x, _y);
+        constructor(..._args) {
+            if (_args.length === 2)
+                this.set(_args[0], _args[1]);
+            else if (_args.length === 1) {
+                this.set(_args[0].x, _args[0].y);
+            }
+        }
+        static getDifference(_v0, _v1) {
+            const vector = new Vector2(_v0.x - _v1.x, _v0.y - _v1.y);
+            return vector;
+        }
+        static random(_minLength, _maxLength) {
+            const length = _minLength + Math.random() * (_maxLength - _minLength);
+            const direction = Math.random() * 2 * Math.PI;
+            const vector = new Vector2(Math.cos(direction), Math.sin(direction));
+            vector.scale(length);
+            return vector;
         }
         get length() {
             return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
@@ -90,19 +105,20 @@ var Asteroids;
             const yNew = this.y * Math.cos(angleRad) + this.x * Math.sin(angleRad);
             this.set(xNew, yNew);
         }
-        set(_x, _y) {
-            this.x = _x;
-            this.y = _y;
+        set(..._args) {
+            console.log(_args);
+            if (_args.length === 1) {
+                this.x = _args[0].x;
+                this.y = _args[0].y;
+            }
+            else if (_args.length === 2) {
+                this.x = _args[0];
+                this.y = _args[1];
+            }
         }
         normalise() {
             const length = this.length;
             this.set(this.x / length, this.y / length);
-        }
-        random(_minLength, _maxLength) {
-            const length = _minLength + Math.random() * (_maxLength - _minLength);
-            const direction = Math.random() * 2 * Math.PI;
-            this.set(Math.cos(direction), Math.sin(direction));
-            this.scale(length);
         }
         copy() {
             return new Vector2(this.x, this.y);
@@ -202,15 +218,14 @@ var Asteroids;
     class Moveable {
         position = new Asteroids.Vector2(0, 0);
         velocity = new Asteroids.Vector2(0, 0);
-        ;
         scale = new Asteroids.Vector2(1, 1);
         rotation = 0;
         path;
-        drawOffset = new Asteroids.Vector2(0, 0);
         deletionQueued = false;
+        drawOffset = new Asteroids.Vector2(0, 0);
         constructor(_position) {
             if (_position) {
-                this.position = _position.copy();
+                this.position = new Asteroids.Vector2(_position);
             }
         }
         get drawLineStrength() {
@@ -316,7 +331,7 @@ var Asteroids;
         size;
         constructor(_size, _position = new Asteroids.Vector2(0, 0)) {
             super(_position);
-            this.velocity.random(50, 60);
+            this.velocity = Asteroids.Vector2.random(50, 60);
             this.type = Math.floor(Math.random() * 4);
             this.size = _size;
             this.scale.set(this.size, this.size);
@@ -328,7 +343,7 @@ var Asteroids;
         }
         isHit(_hotspot) {
             const hitSize = 50 * this.size;
-            const vecBetween = new Asteroids.Vector2(_hotspot.x - this.position.x, _hotspot.y - this.position.y);
+            const vecBetween = Asteroids.Vector2.getDifference(_hotspot, this.position);
             if (vecBetween.length < hitSize) {
                 return true;
             }
@@ -496,8 +511,8 @@ var Asteroids;
     class Projectile extends Asteroids.Moveable {
         lifeTime = 3;
         constructor(_position, _velocity) {
-            super(_position.copy());
-            this.velocity = _velocity.copy();
+            super(new Asteroids.Vector2(_position));
+            this.velocity = new Asteroids.Vector2(_velocity);
             this.velocity.scale(4);
             this.path = Asteroids.projectilePath;
         }
@@ -517,7 +532,7 @@ var Asteroids;
         projectileTimer = 60;
         constructor() {
             super();
-            this.position = this.spawnPoint();
+            //this.position.set(this.spawnPoint);
             this.velocity.set(10, 10);
             this.path = Asteroids.ufoPath;
             this.drawOffset.set(30, 20);
